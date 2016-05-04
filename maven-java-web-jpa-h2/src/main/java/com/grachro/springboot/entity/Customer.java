@@ -1,18 +1,27 @@
-package com.grachro.springboot;
+package com.grachro.springboot.entity;
+
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.springframework.stereotype.Component;
 
 @Entity
+@Component
 public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private long customerId;
 	private String firstName;
 	private String lastName;
+
+	@Transient
+	private List<CustomerSchedule> _customerSchedules;
 
 	protected Customer() {
 	}
@@ -24,15 +33,15 @@ public class Customer {
 
 	@Override
 	public String toString() {
-		return String.format("Customer[id=%d, firstName='%s', lastName='%s']", id, firstName, lastName);
+		return String.format("Customer[customerId=%d, firstName='%s', lastName='%s']", customerId, firstName, lastName);
 	}
 
-	public long getId() {
-		return id;
+	public long getCustomerId() {
+		return customerId;
 	}
 
-	public void setId(long id) {
-		this.id = id;
+	public void setCustomerId(long customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getFirstName() {
@@ -51,4 +60,11 @@ public class Customer {
 		this.lastName = lastName;
 	}
 
+	public List<CustomerSchedule> getCustomerSchedules() {
+		return this._customerSchedules;
+	}
+
+	public void setCustomerSchedules(List<CustomerSchedule> customerSchedules) {
+		this._customerSchedules = customerSchedules;
+	}
 }
