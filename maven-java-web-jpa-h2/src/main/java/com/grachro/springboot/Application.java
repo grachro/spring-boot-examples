@@ -1,5 +1,8 @@
 package com.grachro.springboot;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -15,9 +18,19 @@ public class Application {
 
 	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
- 
+	private static EntityManager em;
+
+	public static EntityManager getEntityManager() {
+		return Application.em;
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class);
+	}
+
+	@PersistenceContext
+	public void setEntityManager(EntityManager em) {
+		Application.em = em;
 	}
 
 	@Bean
